@@ -1,0 +1,52 @@
+.bells-container {
+    display: block;
+    position: relative;
+    padding: 40px;
+    background-image: url('../../public/ressource/fond.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 300px;
+    border-radius: 15px;
+    margin: 20px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.edit-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    z-index: 1000;
+}
+
+.position-info {
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: 12px;
+    white-space: pre-wrap;
+}
+
+.edit-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 8px 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.edit-controls button {
+    padding: 8px 16px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

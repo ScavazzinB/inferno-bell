@@ -1,0 +1,93 @@
+.midi-uploader {
+    background: rgba(26, 26, 26, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    color: white;
+}
+
+.upload-section {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.file-input {
+    background: #2a2a2a;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #4a4a4a;
+    color: white;
+    width: 100%;
+    max-width: 300px;
+}
+
+.progress-container {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(74, 144, 226, 0.1);
+    border-radius: 8px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4A90E2, #63B3ED);
+    transition: width 0.3s ease;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+.progress-percentage {
+    font-weight: bold;
+    color: #4A90E2;
+    min-width: 50px;
+}
+
+.progress-status {
+    color: #8fbbea;
+    margin-left: 10px;
+    flex: 1;
+}
+
+.error-container {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.error-details {
+    color: #ff9999;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
+.status-success {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 5px;
+    color: #4CAF50;
+    font-weight: bold;
+}
+.status-success .status-message {
+    color: #4CAF50;
+}

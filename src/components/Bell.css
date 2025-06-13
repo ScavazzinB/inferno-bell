@@ -1,0 +1,87 @@
+.bell {
+    width: 120px;
+    height: 160px;
+    margin: 0 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Specific classes for each bell */
+.bell.sol {
+    background-image: url('../../public/ressource/sol.png');
+}
+
+.bell.fa {
+    background-image: url('../../public/ressource/fa.png');
+}
+
+.bell.mi {
+    background-image: url('../../public/ressource/mi.png');
+}
+
+.bell.ré {
+    background-image: url('../../public/ressource/re.png');
+}
+
+.bell.do {
+    background-image: url('../../public/ressource/do.png');
+}
+
+/* Rest of your CSS remains the same */
+
+.bell.playing {
+    transform: scale(1.1);
+    animation: ring 0.2s ease-out;
+}
+
+@keyframes ring {
+    0% { transform: rotate(0deg) scale(1.1); }
+    25% { transform: rotate(5deg) scale(1.1); }
+    75% { transform: rotate(-5deg) scale(1.1); }
+    100% { transform: rotate(0deg) scale(1.1); }
+}
+
+.bell:hover {
+    transform: scale(1.05);
+}
+
+.note-label {
+    display: none;
+}
+
+.resize-handle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 50%;
+}
+
+.top-left {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+
+.top-right {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.bottom-left {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+
+.bottom-right {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+}
