@@ -1,13 +1,34 @@
 # server.py
+import os
+import io
+import logging
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import logging
-import io
 import mido
+from melody_detector import MelodyDetector
 
 # Configuration du logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+# Chemin absolu vers le répertoire du script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Chemins vers les samples de cloches dans le dossier 'public/ressource'
+# En partant de backend/, on remonte d'un niveau puis on descend dans public/ressource
+bell_dir = os.path.normpath(os.path.join(script_dir, '..', 'public', 'ressource'))
+bell_samples = {
+    'Do': os.path.join(bell_dir, 'do.wav'),
+    'Ré': os.path.join(bell_dir, 'ré.wav'),  # nom de fichier avec accent
+    'Mi': os.path.join(bell_dir, 'mi.wav'),
+    'Fa': os.path.join(bell_dir, 'fa.wav'),
+    'Sol': os.path.join(bell_dir, 'sol.wav')
+}
+
+# Vérifier l'existence des fichiers de cloche et loguer
+for name, path in bell_samples.items():
+    if not os.path.isfile(path):
+        logger.error(f"Échantillon introuvable pour {name}: {path}")
 
 # Initialiser l'application Flask
 app = Flask(__name__)
@@ -19,10 +40,13 @@ CORS(app, resources={
     }
 })
 
+# Initialiser le détecteur de mélodie avec les samples trouvés
+melody_detector = MelodyDetector(bell_samples=bell_samples)
+
 @app.route('/upload_midi', methods=['POST'])
 def upload_midi():
     """
-    Gère l'upload du fichier MIDI et retourne des informations basiques.
+    Gère l'upload du fichier MIDI et extrait la mélodie.
     """
     if 'midi_file' not in request.files:
         return jsonify({'error': 'Aucun fichier MIDI fourni'}), 400
@@ -34,26 +58,15 @@ def upload_midi():
         midi_data = midi_file.read()
         midi = mido.MidiFile(file=io.BytesIO(midi_data))
 
-        # Informations basiques sur le fichier MIDI
-        tracks_info = []
-        for i, track in enumerate(midi.tracks):
-            track_name = getattr(track, 'name', f'Track {i}')
-            notes_count = sum(1 for msg in track if msg.type == 'note_on' and msg.velocity > 0)
-            tracks_info.append({
-                'track_id': i,
-                'name': track_name,
-                'notes_count': notes_count
-            })
+        # Extraction de la séquence monophonique
+        sequence = melody_detector.extract(midi)
 
-        # Pour les tests, retourner un tableau vide comme séquence
-        dummy_sequence = []
-
-        return jsonify({
-            'message': 'Fichier MIDI reçu avec succès',
-            'filename': midi_file.filename,
-            'tracks': tracks_info,
-            'sequence': dummy_sequence
-        })
+        if sequence:
+            logger.info(f"Séquence extraite, {len(sequence)} notes")
+            return jsonify({'sequence': sequence}), 200
+        else:
+            logger.info("Aucune séquence détectée.")
+            return jsonify({'error': 'Aucune mélodie détectée', 'sequence': []}), 200
 
     except Exception as e:
         logger.error(f"Erreur lors du traitement du fichier MIDI : {str(e)}")
