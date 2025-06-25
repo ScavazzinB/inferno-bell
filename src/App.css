@@ -1,17 +1,13 @@
 .App {
   text-align: center;
   min-height: 100vh;
-  background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+  background: linear-gradient(45deg, rgba(26, 26, 26, 0.8), rgba(42, 42, 42, 0.8)), url('../public/ressource/background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: white;
   display: flex;
   flex-direction: column;
-}
-
-.App-header {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  color: white;
-  margin-bottom: 20px;
 }
 
 .App-header h1 {
@@ -29,8 +25,16 @@ main {
   box-sizing: border-box;
 }
 
+/* For App.css - header and footer */
+.App-header {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+
 footer {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   padding: 20px;
   color: #888;
   font-size: 0.9em;

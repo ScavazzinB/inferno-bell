@@ -1,9 +1,11 @@
+/* For MidiUploader.css */
 .midi-uploader {
-    background: rgba(26, 26, 26, 0.8);
+    background: rgba(26, 26, 26, 0.3); /* More transparent */
     padding: 20px;
     border-radius: 10px;
     margin: 20px 0;
     color: white;
+    backdrop-filter: blur(3px); /* Optional: adds a slight blur effect */
 }
 
 .upload-section {
